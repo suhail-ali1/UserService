@@ -1,6 +1,8 @@
 package com.hcl.Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -18,12 +20,13 @@ import lombok.Setter;
 public class Users {
 
 	@Id
-	private String userid;
-	private String username;
-	private String password;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long userid;
+	private String firstname;
+	private String lastname;
 	private String email;
 	private String mobile;
+	private String password;
 	private String DOB ;
-	
 	
 }

@@ -16,31 +16,31 @@ public class UsersServiceImpl implements IUsersService {
 	
 	
 	@Override
-	public Users getUser(String identity , String password) {
+	public Users getUser(String email , String password) {
 		
 		Users user = null;
         
-		if(userRepo.checkEmail(identity))
+		if(userRepo.checkEmail(email))
 		{
 			System.out.println("Inside email");
 			//System.out.println(userRepo.findById(identity).get());
-			user = userRepo.findByEmail(identity);
+			user = userRepo.findByEmail(email);
+	       
+			if( user != null  && user.getPassword().equals(password))
+			 {
+				  return user;
+			 }
+		    else 
+			{
+				return null;
+			}
 			 
 		}
-		else if(userRepo.existsById(identity))
-		{
-			user = userRepo.findById(identity).get();
-		}
-		
-		
-	   if( user != null  && user.getPassword().equals(password))
-		 {
-			  return user;
-		 }
-	  else 
+		else
 		{
 			return null;
 		}
+	   
 		
 		
 	}
@@ -54,7 +54,7 @@ public class UsersServiceImpl implements IUsersService {
 	}
 
 	@Override
-	public String deleteUser(String userid) {
+	public String deleteUser(long userid) {
 		
 		
 		 userRepo.deleteById(userid);
@@ -63,7 +63,7 @@ public class UsersServiceImpl implements IUsersService {
 	
 	
 	@Override
-	public Users updateEmail(String userid , String oldemail, String newemail) {
+	public Users updateEmail( long userid , String oldemail, String newemail) {
 		
 		Users user = userRepo.findById(userid).get();
 		user.setEmail(newemail);

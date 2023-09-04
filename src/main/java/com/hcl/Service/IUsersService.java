@@ -7,9 +7,9 @@ import com.hcl.Entity.Users;
 @Service
 public interface IUsersService {
 
-	Users getUser(String identity , String password ); // identity can be userid or email.
+	Users getUser(String email , String password ); // identity can be userid or email.
 	Users registerUser(Users user); // Registers user. 
-	String deleteUser(String userid);
-	Users updateEmail(String userid ,String oldemail , String newemail);
+	String deleteUser(long userid);
+	Users updateEmail(long userid ,String oldemail , String newemail);
 	
 }
